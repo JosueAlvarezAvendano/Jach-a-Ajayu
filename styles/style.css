@@ -25,7 +25,7 @@ body {
 }
 
 header {
-   background-color: rgba(0, 0, 0, 0.7);
+   background-color: rgba(0, 0, 0, 0.8);
    width: 100%;
    padding: 5px 4%; /* Mudar o tamanho do padding  - 60px 4px*/
    position: fixed;
