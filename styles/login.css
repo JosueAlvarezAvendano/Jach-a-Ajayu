@@ -132,6 +132,7 @@ button {
 
 button:hover {
    background-color: #FABB1B;
+   cursor: pointer;
 }
 
 .card-login p {
