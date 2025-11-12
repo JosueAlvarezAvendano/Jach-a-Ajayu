@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+header {
+   background-color: rgba(0, 0, 0, 0.8);
+   width: 100%;
+   padding: 5px 4%; /* Mudar o tamanho do padding  - 60px 4px*/
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 3;
+}
+
+.container {
+   max-width: 100%;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+header img {
+   height: 50px;
+   font-size: 30px;
+   color: white;
+   margin-left: 15px;
+}
+
+header ul {
+   list-style-type: none;
+}
+
+header ul li {
+   display: inline-block;
+   margin: 0 40px;
+}
+
+header ul li a {
+   
+   color: white;
+   text-decoration: none;
+}
+
+header ul li a:hover {
+   color: #FABB1B;
+}
+
+.banner {
+    background-image: url(../midias/imagens/recorridos/12-Leonor-Hills-dsc8842-2-750x501.jpg);
+    background-size: cover;
+    height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.card-login {
+    margin-top: 80px;
+    background-color: rgba(0, 0, 0, 0.800);
+    width: 35vw; /* 500px */
+    height: 80vh; /* 530px */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-paisagem {
+    margin-top: 2vw;
+    display: flex;
+    height: 18vh;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.logo-paisagem img{
+    height: 16vh;
+}
+
+.card-login h1 {
+    text-align: center;
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 2vh 0 2vh 0;
+}
+
+.inputs {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5vh;
+   padding: 2.5vh 0 1vh 0;
+}
+
+input {
+   background-color: black;
+   color: white;
+   border: 0px;
+   border-radius: 13px;
+   height: 8vh;
+   width: 30vw;
+   padding-left: 15px;
+   font-size: 20px;
+}
+
+.mensagem-erro p {
+   color: rgba(255, 0, 0, 0);
+   text-align: center;
+   line-height: 1.7;
+   height: 8vh;
+   
+}
+
+button {
+   background-color: #FABB1B;
+   border: 2px solid black;
+   color: black;
+   width: 11vw;
+   height: 6vh;
+   border: 0px;
+   border-radius: 20px;
+   font-size: 1.5em;
+}
+
+button:hover {
+   background-color: #FABB1B;
+}
+
+.card-login p {
+   margin-top: 10px;
+   color: white;
+}
+
+.card-login p a {
+   color: white;
+}
+
+.footer {
+   background-color: black;
+   color: white;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 4%;
+}
+
+.footer img {
+   height: 50px;
+   margin: 5px;
+}
