@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jach'a Ajayu - Login</title>
-    <link rel="shortcut icon" href="midias/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/login.css">
+    <title>Jach'a Ajayu - Cadastre-se</title>
+    <link rel="stylesheet" href="../styles/cadastro.css">
 </head>
-
 <body>
     <header id="header">
         <div class="container">
@@ -16,53 +13,47 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Cadastre-se</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Minha história</a></li>
+                    <li><a href="cadastro.html">Cadastre-se</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
             </nav>
         </div><!-- Container -->
     </header>
     <section class="banner">
-        <div class="card-login">
+        <div class="card_cadastro">
             <div class="logo-paisagem">
                 <img src="../midias/imagens/logo/Jach'a_Ajayu_logoPaissagem1.png" alt="">
             </div>
-            <h1>Bem Vindo</h1>
-            <div class="inputs">
+            <h1>Cadastre-se</h1>
+            <form class="inputs">
+                <input id="input_nome" type="text" placeholder="Nome">
+                <input id="input_sobrenome" type="text" placeholder="Sobrenome">
                 <input id="input_email" type="text" placeholder="E-mail">
                 <input id="input_senha" type="password" placeholder="Senha">
-            </div>
-            <div class="mensagem-erro">
-                <p id="mensagem-erro"></p>
-            </div>
-            <button onclick="login()">Entrar</button>
-            <p>Ainda não tem cadastro? <a href="#">Cadastre-se aqui</a></p>
-        </div> <!-- Fim Card Login -->
+            </form>
+                <div class="mensagem_erro">
+                    <p id="mensagem_erro">Preencha todos os campos!</p>
+                </div>
+            <button onclick="cadastrar()">Cadastrar</button>
+            <p>Já possui um cadastro. <a href="#">Acesse sua conta aqui. </a></p>
+        </div> <!-- Fim Card Cadastro -->
     </section>
     <footer class="footer">
         <p>© 2025 JACH’A AJAYU. Todos os direitos reservados</p>
         <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
     </footer>
 </body>
-
 </html>
 <script>
-    function login() {
+    function cadastrar() {
         var email = input_email.value,
             senha = input_senha.value;
 
-        if (email == "" ||
-            email.includes(' ') ||
-            !email.includes('@') ||
-            (!email.endsWith(".com") && !email.endsWith(".br"))) {
-            document.getElementById("mensagem-erro").innerHTML = `E-mail ou senha inválidos. Tente novamente.`;
-            document.getElementById("mensagem-erro").style.color = "red";
-        } else {
-            alert('Consegui!')
+        if (email == '' || senha == '') {
+            mensagem_erro.innerHTML = `Preencha todos os campos!`;
+            mensagem_erro.style.color = "red";
         }
-
-
-
+        // mensagem_erro.innerHTML = `E-mail ou senha inválidos. Tente novamente.`;
     }
 </script>
