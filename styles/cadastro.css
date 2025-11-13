@@ -70,6 +70,7 @@ header ul li a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 3px 3px 6px black;
 }
 
 .logo-paisagem {
@@ -143,6 +144,10 @@ button:hover {
 
 .card_cadastro p a {
    color: white;
+}
+
+.login {
+   padding-top: 15px;
 }
 
 .footer {
