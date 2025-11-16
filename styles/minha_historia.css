@@ -91,8 +91,10 @@ header ul li a:hover {
     transition: 1s;
 }
 
+
+/* Primeira Seção */
 .minhas_raizes {
-    background-color: #006400;
+    background-color: #8B0000;
     height: 85vh;
     width: 100vw;
     display: flex;
@@ -142,8 +144,10 @@ header ul li a:hover {
     border-radius: 10px;
 }
 
+
+/* Segundo Seção */
 .inicio {
-    background-color: #008B8B;
+    background-color: #FFD700;
     height: 85vh;
     width: 100vw;
     display: flex;
@@ -158,7 +162,7 @@ header ul li a:hover {
     padding: 30px 0px 30px 0px;
 }
 
-.inicio .card_video {
+.inicio .card_imagem {
     height: 63vh;
     width: 24vw;
     border-top-left-radius: 15px;
@@ -170,14 +174,14 @@ header ul li a:hover {
     transition: 1s;
 }
 
-.inicio video {
+.inicio img {
     height: 60vh;
     width: 22vw;
     object-fit: cover;
     border-radius: 10px;
 }
 
-.card_video:hover {
+.card_imagem:hover {
     transform: scale(1.05);
     transition: 1s;
 }
