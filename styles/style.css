@@ -200,15 +200,66 @@ header ul li a:hover {
    background-color: #008B8B;
    height: 85vh;
    width: 100vw;
-   position: relative;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+.folclore .texto_dança {
+   width: 40vw;
+}
+
+.texto_dança h1 {
+   color: white;
+   text-align: center;
+}
+
+.texto_dança p {
+   color: white;
+   text-align: justify;
+   text-indent: 40px;
+   line-height: 1.7;
+}
+
+.folclore .card_folclore {
+   height: 63vh;
+   width: 22.5vw;
+   box-shadow: 3px 3px 5px black;
+   border-bottom-right-radius: 15px;
+   border-top-left-radius: 15px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: 1s;
+}
+
+.card_folclore img {
+   height: 60vh;
+   width: 21vw;
+   object-fit: cover;
+   border-radius: 10px;
+}
+
+.card_folclore:hover {
+   transform: scale(1.05);
+   transition: 1s;
+}
+
+
+/* DANÇA BOLIVIA */
+
+.titulo_danças {
+   background-color: #FF8C00;
+   color: black;
+   border-top: 3px solid black;
+   border-bottom: 3px solid black;
+   height: 15vh;
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
 
-
-/* DANÇA BOLIVIA */
 /* CAPORALES */
 .danca-caporales {
    background-color: #8B0000;
@@ -267,7 +318,7 @@ header ul li a:hover {
    align-items: center;
 }
 .danca-diablada .text-diablada {
-   color: white;
+   color: black;
    height: 400px;
    width: 500px;
    font-size: 19px;
