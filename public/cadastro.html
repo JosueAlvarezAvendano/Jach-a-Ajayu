@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="shortcut icon" href="../midias/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../styles/cadastro.css">
 </head>
+
 <body>
     <header id="header">
         <div class="container">
@@ -33,9 +35,9 @@
                 <input id="input_email" type="text" placeholder="E-mail">
                 <input id="input_senha" type="password" placeholder="Senha">
             </div>
-                <div class="mensagem_erro">
-                    <p id="mensagem_erro">Preencha todos os campos!</p>
-                </div>
+            <div class="mensagem_erro">
+                <p id="mensagem_erro"></p>
+            </div>
             <button onclick="cadastrar()">Cadastrar</button>
             <p class="login">Já possui um cadastro. <a href="login.html">Acesse sua conta aqui. </a></p>
         </div> <!-- Fim Card Cadastro -->
@@ -45,16 +47,105 @@
         <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
     </footer>
 </body>
+
 </html>
 <script>
+    const caractEspecial = ["!", "@", "#", "$", "%", "&", "*", "<", ">", "(", ")", "?"]
+
+    function mostrarErro(msg) {
+        mensagem_erro.innerHTML = msg;
+        mensagem_erro.style.color = "red";
+    }
+
     function cadastrar() {
-        var email = input_email.value,
+        var nome = input_nome.value,
+            sobrenome = input_sobrenome.value,
+            email = input_email.value,
             senha = input_senha.value;
 
-        if (email == '' || senha == '') {
-            mensagem_erro.innerHTML = `Preencha todos os campos!`;
-            mensagem_erro.style.color = "red";
+        // Validação do Preenchimento de Todos os Campos
+        if (nome == '' || sobrenome == '' || email == '' || senha == '') {
+            mostrarErro(`Preencha todos os campos!`);
+            return
         }
-        // mensagem_erro.innerHTML = `E-mail ou senha inválidos. Tente novamente.`;
+
+        // Validação do Nome
+        if (nome.trim().length == 1) {
+            mostrarErro("O nome precisa ter pelo menos 2 letras!");
+            return
+        }
+
+        for (let i = 0; i < nome.length; i++) {
+            let char = nome[i];
+            if (!isNaN(nome[i]) || caractEspecial.includes(char)) {
+                mostrarErro("O nome não pode conter números ou caracteres especiaisi!");
+                return;
+            }
+        }
+
+        // Validação do Sobrenome
+        if (sobrenome.trim().length == 1) {
+            mostrarErro("O sobrenome precisa ter pelo menos 2 letras!");
+            return;
+        }
+
+        for (let i = 0; i < sobrenome.length; i++) {
+            let char = sobrenome[i]
+            if (!isNaN(sobrenome[i]) || caractEspecial.includes(char)) {
+                mostrarErro("O sobrenome não pode conter números ou caracteres especiaisi!");
+                return;
+            }
+        }
+
+        // Validação do Email
+        if (!email.includes("@") || !email.includes(".") || email.includes(' ')) {
+            mostrarErro("Insira um email válido!");
+            return;
+        }
+
+        // Validação da Senha
+        if (senha.length < 8) {
+            mostrarErro("A senha precisa ter pelo menos 8 caracteres!");
+            return;
+        }
+
+        let temMaiuscula = false;
+        let temMinuscula = false;
+        let temNumero = false;
+        let temEspecial = false;
+
+        for (let i = 0; i < senha.length; i++) {
+            let char = senha[i];
+
+            // verifica maiúscula
+            if (char >= 'A' && char <= 'Z') {
+                temMaiuscula = true;
+            }
+
+            // verifica minúscula
+            else if (char >= 'a' && char <= 'z') {
+                temMinuscula = true;
+            }
+
+            // verifica número
+            else if (!isNaN(char)) {
+                temNumero = true;
+            }
+
+            // verifica caractere especial
+            else if (caractEspecial.includes(char)) {
+                temEspecial = true;
+            }
+        }
+
+        // valida resultados
+        if (!temMaiuscula || !temMinuscula || !temNumero || !temEspecial) {
+            mostrarErro("A senha deve ter maiúsculas, minúsculas, números e um caractere especial!");
+            return;
+        }
+
+        // Tudo OK
+        mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+        mensagem_erro.style.color = "   green";
     }
 </script>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -19,38 +21,43 @@ body {
     position: fixed;
     top: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    width: 20vw;
+    width: 17vw;
     height: 100%;
     padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.logo {
-    width: 100%;
-}
-
-.logo > img {
-    color: #FABB1B;
-    font-size: 30px;
-    cursor: pointer;
-    width: 16.5vw;
+img {
+    width: 7vw;
 }
 
 .usuario {
     color: #FABB1B;
     font-size: 1.3em;
+    margin: 20px;
     padding: 20px 0px;
+}
+
+.usuario p {
+    font-family: "Roboto Mono", monospace;
 }
 
 button {
     background-color: transparent;
     color: #FABB1B;
-    width: 15vw;
+    width: 12vw;
     height: 10vh;
     margin: 10px 0px;
     text-align: left;
     font-size: 1.3em;
     border: 0px;
     cursor: pointer;
+}
+
+button .texto_btn {
+    font-family: "Roboto Mono", monospace;
 }
 button:hover {
     color: white;
