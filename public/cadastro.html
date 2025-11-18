@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Cadastre-se</title>
-    <link rel="shortcut icon" href="../midias/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/cadastro.css">
+    <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
 
 <body>
     <header id="header">
         <div class="container">
-            <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
+            <a href="index.html"><img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
@@ -26,14 +26,14 @@
     <section class="banner">
         <div class="card_cadastro">
             <div class="logo-paisagem">
-                <img src="../midias/imagens/logo/Jach'a_Ajayu_logoPaissagem1.png" alt="">
+                <img src="assets/imgs/logo/Jach'a_Ajayu_logoPaissagem.svg" alt="">
             </div>
             <h1>Cadastre-se</h1>
             <div class="inputs">
-                <input id="input_nome" type="text" placeholder="Nome">
-                <input id="input_sobrenome" type="text" placeholder="Sobrenome">
-                <input id="input_email" type="text" placeholder="E-mail">
-                <input id="input_senha" type="password" placeholder="Senha">
+                <input id="input_nome" type="text" placeholder="Nome" autocomplete="off">
+                <input id="input_sobrenome" type="text" placeholder="Sobrenome" autocomplete="off">
+                <input id="input_email" type="text" placeholder="E-mail" autocomplete="off">
+                <input id="input_senha" type="password" placeholder="Senha" autocomplete="off">
             </div>
             <div class="mensagem_erro">
                 <p id="mensagem_erro"></p>
@@ -44,7 +44,7 @@
     </section>
     <footer class="footer">
         <p>© 2025 JACH’A AJAYU. Todos os direitos reservados</p>
-        <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
+        <a href="index.html"><img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
     </footer>
 </body>
 
@@ -144,8 +144,43 @@
             return;
         }
 
-        // Tudo OK
-        mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-        mensagem_erro.style.color = "   green";
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                sobrenomeServer: sobrenome,
+                emailServer: email,
+                senhaServer: senha
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    mensagem_erro.innerHTML ="Cadastro realizado com sucesso!";
+                    mensagem_erro.style.color = "green";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
     }
+
+
+
 </script>

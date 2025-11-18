@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Login</title>
-    <link rel="shortcut icon" href="../midias/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
     <header id="header">
         <div class="container">
-            <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
+            <a href="index.html"><img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
             <nav>
                 <ul>
                     <li><a href="index.html">Início</a></li>
@@ -26,36 +26,105 @@
     <section class="banner">
         <div class="card-login">
             <div class="logo-paisagem">
-                <img src="../midias/imagens/logo/Jach'a_Ajayu_logoPaissagem1.png" alt="">
+                <img src="assets/imgs/logo/Jach'a_Ajayu_logoPaissagem.svg" alt="">
             </div>
             <h1>Bem Vindo</h1>
             <form class="inputs">
                 <input id="input_email" type="text" placeholder="E-mail">
                 <input id="input_senha" type="password" placeholder="Senha">
             </form>
-                <div class="mensagem_erro">
-                    <p id="mensagem_erro"></p>
-                </div>
+            <div class="mensagem_erro">
+                <p id="mensagem_erro"></p>
+            </div>
             <button onclick="login()">Entrar</button>
             <p>Ainda não tem cadastro? <a href="cadastro.html">Cadastre-se aqui</a></p>
         </div> <!-- Fim Card Login -->
     </section>
     <footer class="footer">
         <p>© 2025 JACH’A AJAYU. Todos os direitos reservados</p>
-        <a href="index.html"><img src="../midias/imagens/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
+        <a href="index.html"><img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt=""></a>
     </footer>
 </body>
 
 </html>
 <script>
+    function mostrarErro(msg) {
+        mensagem_erro.innerHTML = msg;
+        mensagem_erro.style.color = "red";
+    }
+
     function login() {
         var email = input_email.value,
             senha = input_senha.value;
 
+        // Validação do Preenchimento de Todos os Campos
         if (email == '' || senha == '') {
-            mensagem_erro.innerHTML = `Preencha todos os campos!`;
-            mensagem_erro.style.color = "red";
+            mostrarErro("Preencha todos os campos!")
+            return
         }
-        // mensagem_erro.innerHTML = `E-mail ou senha inválidos. Tente novamente.`;
+
+        // Email inválido
+        if (!email.includes("@") || !email.includes(".") || email.includes(" ")) {
+            mostrarErro("Insira um email válido!");
+            return;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location = "quiz.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+
+
+
+
+        // // Tudo OK
+        // mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+        // mensagem_erro.style.color = "green";
+
+        // setTimeout(() => {
+        //     window.location.href = "quiz.html";
+        // }, 1500);
     }
+
+
 </script>
+<!-- mensagem_erro.innerHTML = `E-mail ou senha inválidos. Tente novamente.`; -->
