@@ -63,7 +63,7 @@ header ul li a:hover {
    z-index: 2;
    background-color: #330606;
    height: 26.5vh; /* 170px */
-   width: 38.5vw; /* 480px */
+   width: 36vw; /* 480px */
    text-align: right;
    bottom: 13vh; 
    left: 55vw;
@@ -247,12 +247,12 @@ header ul li a:hover {
 
 
 /* DANÇA BOLIVIA */
-
 .titulo_danças {
    background-color: #FF8C00;
    color: black;
    border-top: 3px solid black;
    border-bottom: 3px solid black;
+   width: 100vw;
    height: 15vh;
    display: flex;
    justify-content: center;
