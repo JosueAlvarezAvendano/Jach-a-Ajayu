@@ -8,6 +8,7 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    border: 1px dashed white;
 }
 
 :root {
@@ -34,51 +35,26 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.flex-colunar {
-    display: flex;
-    flex-direction: column;
-}
-
-.width-fit-content {
-    width: fit-content;
-}
-
-.border-primary {
-    width: 100%;
-    border: 3px solid var(--primary-brand-color);
-}
-
-.border-secondary {
-    width: 100%;
-    border: 3px solid var(--secondary-brand-color);
-}
-
-.padding-8 {
     color: white;
-    padding: 8px;
 }
 
-.text-bold {
-    font-weight: bold;
-}
-
+/* NÃO APAGAR */
 .text-success-with-bg {
     color: var(--success-dark);
     background-color: var(--success-light);
 }
-
+/* NÃO APAGAR */
 .text-warning-with-bg {
     color: var(--warning-dark);
     background-color: var(--warning-light);
 }
-
+/* NÃO APAGAR */
 .text-danger-with-bg {
     color: var(--danger-dark);
     background-color: var(--danger-light);
 }
 
+/* NÃO APAGAR */
 .text-new-gray {
     color: var(--new-gray);
 }
@@ -100,6 +76,97 @@ button.iniciarQuiz {
 button.iniciarQuiz:hover {
     transform: scale(1.05);
     transition: 1s;
+}
+
+#msg_inicial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pontuacao {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pontuacaoDuranteJogo {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pontuacaoFinalJogo {
+    width: 30%;
+    height: 100%;
+}
+
+.jogo {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoQuestao {
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.perguntaDaQuestaoAtual {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alternativas {
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.alternativa {
+    width: 40%;
+    height: 40%;
+}
+
+label {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1.5s;
+    box-shadow: 3px 3px 5px black;
+}
+
+label:hover {
+    transform: scale(1.08);
+    transition: 1.5s;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.botoes {
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+button.botao {
+    width: 25%;
+    height: 60%;
 }
 
 
@@ -164,7 +231,7 @@ button.opcoes:hover {
 }
 
 .cx_quiz {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     width: 85%;
     height: 85%;
     display: flex;
@@ -178,8 +245,4 @@ button.opcoes:hover {
     text-align: center;
     color: white;
     margin-bottom: 20px;
-}
-
-radio {
-    
 }

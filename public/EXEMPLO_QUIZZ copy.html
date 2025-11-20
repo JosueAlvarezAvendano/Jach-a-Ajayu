@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Quiz</title>
     <link rel="stylesheet" href="../public/css/style copy.css">
     <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
+
 <body onload="onloadEsconder()">
     <nav class="menu_lateral"> <!-- Fim - menu lateral -->
         <img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt="">
@@ -33,63 +35,77 @@
         </button>
     </nav> <!-- Fim - menu lateral -->
 
+
     <div class="tela">
-        <div class="cx_quiz">
-            <h1 id="titulo_inicial">Preparado para o desafio? Comece o quiz!</h1>
-            <div id="pontuacaoEJogo">
+        <div class="cx_quiz"> <!-- FUNDO PRETO -->
+
+            <div id="msg_inicial">
+                <h1 id="titulo_inicial">Preparado para o desafio? Comece o quiz!</h1>
                 <button id="btnIniciarQuiz" class="iniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
-                <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-                    <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                        <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                        <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-                    </div>
-                    <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                        <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                            <span id="spanPontuacaoFinal">***</span>
-                        </span>
-                        <span id="msgFinal" class="width-fit-content">***</span>
-                    </div>
-                </div>
-                <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-                    <div id="infoQuestao" class="padding-8">
-                        <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                            questões.</span>
-                    </div>
-                    <div id="perguntaDaQuestaoAtual" class="padding-8">
-                        <span id="spanQuestaoExibida" class="text-bold"></span>
-                    </div>
-                    <div id="infoAlternativas" class="padding-8">
-                        <span><em>Escolha uma opção dentre as abaixo:</em></span>
-                    </div>
+            </div><!-- FIM msg_inicial -->
 
-                    <!-- Alternativas ? -->
-                    <div id="opcoes" class="flex-colunar padding-8">
-                        <span>
-                            <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                            <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                            <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                            <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                        </span>
-                        <span>
-                            <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                            <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                        </span>
-                    </div>
-
-                    <div id="botoes" class="flex-colunar padding-8">
-                        <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                        <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                        <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                        <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-                    </div>
+            <div id="pontuacao" class="pontuacao">
+                <div id="pontuacaoDuranteJogo" class="pontuacaoDuranteJogo">
+                    <span>Quantidade de acertos: <span id="spanCertas"></span></span>
+                    <span>Quantidade de erros: <span id="spanErradas"></span></span>
                 </div>
-            </div> <!-- FIM pontuacaoEJogo -->
+
+                <div id="pontuacaoFinalJogo" class="pontuacaoFinalJogo">
+                    <span id="pontuacaoFinal">Pontuação Final:
+                        <span id="spanPontuacaoFinal">***</span>
+                    </span>
+                    <span id="msgFinal">***</span>
+                </div>
+            </div> <!-- FIM pontiação -->
+
+
+            <div id="jogo" class="jogo">
+
+                <div id="infoQuestao" class="infoQuestao">
+                    <span style="margin-left: 10px;">Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>questões.</span>
+                </div>
+
+                <div id="perguntaDaQuestaoAtual" class="perguntaDaQuestaoAtual">
+                    <span id="spanQuestaoExibida"></span>
+                </div>
+
+                <!-- <div id="infoAlternativas">
+                    <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                </div> -->
+
+                <!-- ALTERNATIVAS -->
+                <div id="opcoes" class="alternativas">
+                    <span class="alternativa">
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                    </span>
+                </div>
+
+                <!-- BOTÕES -->
+                <div id="botoes" class="botoes">
+                    <button onclick="submeter()" id="btnSubmeter" class="botao">Submeter resposta</button>
+                    <button onclick="avancar()" id="btnProx" class="botao" disabled>Avançar para próxima questão</button>
+                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                    <button onclick="tentarNovamente()" id="btnTentarNovamente" class="botao" disabled>Tentar novamente</button>
+                </div> <!-- FIM botões -->
+
+            </div> <!-- FIM jogo -->
+
         </div> <!-- TELA DE FUNDO -->
     </div>
 </body>
@@ -102,8 +118,8 @@
 
     function sair() {
         setTimeout(function () {
-                        window.location = "login.html";
-                    }, 1000);
+            window.location = "login.html";
+        }, 1000);
     }
 
     const listaDeQuestoes = [
@@ -206,7 +222,7 @@
             alternativaD: "Tobas",
             alternativaCorreta: "alternativaC"
         },
-        
+
         {   /* DECIMA SEGUNDA PERGUNTA */
             pergunta: "O Caporales surgiu inicialmente em:",
             alternativaA: "sucre",
@@ -235,8 +251,7 @@
     function iniciarQuiz() {
         document.getElementById('pontuacao').style.display = "flex"
         document.getElementById('jogo').style.display = "flex"
-        document.getElementById('btnIniciarQuiz').style.display = "none"
-        document.getElementById('titulo_inicial').style.display = "none"
+        document.getElementById('msg_inicial').style.display = "none"
 
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
@@ -361,6 +376,7 @@
         })
     }
 
+    // Função para desmarcar as opções
     function desmarcarRadioButtons() {
         const options = document.getElementsByName("option");
         for (let i = 0; i < options.length; i++) {
@@ -386,14 +402,14 @@
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
 
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
+        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-        document.getElementById('jogo').classList.add("text-new-gray") 
+        document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
