@@ -19,7 +19,7 @@
         </div>
         <button class="opcoes">
             <i class="bi bi-house-door"></i>
-            <span class="texto_btn">Início</span>
+            <span class="texto_btn" onclick="inicio()">Início</span>
         </button>
         <button class="opcoes">
             <i class="bi bi-columns-gap"></i>
@@ -45,16 +45,25 @@
             </div><!-- FIM msg_inicial -->
 
             <div id="pontuacao" class="pontuacao">
+
                 <div id="pontuacaoDuranteJogo" class="pontuacaoDuranteJogo">
-                    <span>Quantidade de acertos: <span id="spanCertas"></span></span>
-                    <span>Quantidade de erros: <span id="spanErradas"></span></span>
+                    <div class="acertos">
+                        <span>Quantidade de acertos:</span>
+                        <span id="spanCertas" class="metrica"></span>
+                    </div>
+                    <div class="erros">
+                        <span>Quantidade de erros:</span>
+                        <span id="spanErradas" class="metrica"></span>
+                    </div>
                 </div>
 
                 <div id="pontuacaoFinalJogo" class="pontuacaoFinalJogo">
-                    <span id="pontuacaoFinal">Pontuação Final:
-                        <span id="spanPontuacaoFinal">***</span>
-                    </span>
-                    <span id="msgFinal">***</span>
+                    <div class="pontoFinal">
+                        <span id="pontuacaoFinal">Pontuação Final:
+                        </span>
+                        <span id="spanPontuacaoFinal"></span>
+                    </div>
+                    <span id="msgFinal" class="msgFinal"></span>
                 </div>
             </div> <!-- FIM pontiação -->
 
@@ -76,22 +85,22 @@
                 <!-- ALTERNATIVAS -->
                 <div id="opcoes" class="alternativas">
                     <span class="alternativa">
-                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" onclick="selecionou()"/>
                         <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" onclick="selecionou()"/>
                         <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" onclick="selecionou()"/>
                         <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" onclick="selecionou()"/>
                         <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
                     </span>
                 </div>
@@ -115,6 +124,10 @@
 
     var nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `Olá, ${nome}`;
+
+    function inicio() {
+        window.location.reload()
+    }
 
     function sair() {
         setTimeout(function () {
@@ -319,7 +332,7 @@
         if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            alert("Atenção... a próxima é a ultima questão!")
+            // alert("Atenção... a próxima é a ultima questão!")
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else {
             finalizarJogo()
@@ -391,22 +404,22 @@
 
         if (porcentagemFinalDeAcertos <= 0.3) {
             textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
+            // classComCoresParaMensagemFinal = "text-danger-with-bg"
         }
         else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
             textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
+        //     classComCoresParaMensagemFinal = "text-warning-with-bg"
         }
         else if (porcentagemFinalDeAcertos >= 0.9) {
             textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
+            // classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
         textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
 
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+        // document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
         document.getElementById('jogo').classList.add("text-new-gray")
