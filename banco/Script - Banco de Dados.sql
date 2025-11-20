@@ -16,3 +16,5 @@ SELECT * FROM usuario;
 
 DROP TABLE usuario;
 DROP DATABASE jacha_ajayu;
+
+

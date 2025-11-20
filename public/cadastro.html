@@ -76,8 +76,8 @@
         }
 
         for (let i = 0; i < nome.length; i++) {
-            let char = nome[i];
-            if (!isNaN(nome[i]) || caractEspecial.includes(char)) {
+
+            if (!isNaN(nome[i]) || caractEspecial.includes(nome[i])) {
                 mostrarErro("O nome não pode conter números ou caracteres especiaisi!");
                 return;
             }
@@ -90,8 +90,8 @@
         }
 
         for (let i = 0; i < sobrenome.length; i++) {
-            let char = sobrenome[i]
-            if (!isNaN(sobrenome[i]) || caractEspecial.includes(char)) {
+            // let letra = sobrenome[i]
+            if (!isNaN(sobrenome[i]) || caractEspecial.includes(nome[i])) {
                 mostrarErro("O sobrenome não pode conter números ou caracteres especiaisi!");
                 return;
             }
@@ -115,25 +115,23 @@
         let temEspecial = false;
 
         for (let i = 0; i < senha.length; i++) {
-            let char = senha[i];
 
-            // verifica maiúscula
-            if (char >= 'A' && char <= 'Z') {
+            if (senha[i] >= 'A' && senha[i] <= 'Z') {
                 temMaiuscula = true;
             }
 
             // verifica minúscula
-            else if (char >= 'a' && char <= 'z') {
+            else if (senha[i] >= 'a' && senha[i] <= 'z') {
                 temMinuscula = true;
             }
 
             // verifica número
-            else if (!isNaN(char)) {
+            else if (!isNaN(senha[i])) {
                 temNumero = true;
             }
 
             // verifica caractere especial
-            else if (caractEspecial.includes(char)) {
+            else if (caractEspecial.includes(senha[i])) {
                 temEspecial = true;
             }
         }

@@ -47,6 +47,7 @@ header ul li a {
    font-family: "Roboto Mono", monospace;
    color: #FABB1B;
    text-decoration: none;
+   transition: 1s;
 }
 
 header ul li a:hover {

@@ -1,0 +1,185 @@
+/* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
+/* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --primary-brand-color: #ED145B;
+    --secondary-brand-color: #0762C8;
+    --success: #198754;
+    --success-dark: #095c36;
+    --success-light: #9dd3ba;
+    --warning: #ffc107;
+    --warning-dark: #705400;
+    --warning-light: #fdebb3;
+    --danger: #dc3545;
+    --danger-dark: #990c19;
+    --danger-light: #f0c1c6;
+    --new-gray: #CCCCCC;
+    --new-black: #212427;
+    --new-white: #E8E8E8;
+}
+
+body {
+    background-image: url(../assets/imgs/recorridos/carrossel_img1.png);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.flex-colunar {
+    display: flex;
+    flex-direction: column;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.border-primary {
+    width: 100%;
+    border: 3px solid var(--primary-brand-color);
+}
+
+.border-secondary {
+    width: 100%;
+    border: 3px solid var(--secondary-brand-color);
+}
+
+.padding-8 {
+    color: white;
+    padding: 8px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-success-with-bg {
+    color: var(--success-dark);
+    background-color: var(--success-light);
+}
+
+.text-warning-with-bg {
+    color: var(--warning-dark);
+    background-color: var(--warning-light);
+}
+
+.text-danger-with-bg {
+    color: var(--danger-dark);
+    background-color: var(--danger-light);
+}
+
+.text-new-gray {
+    color: var(--new-gray);
+}
+
+button.iniciarQuiz {
+    background-color: #FABB1B;
+    color: black;
+    height: 12vh; /* 15% */
+    width: 20vw; /* 30% */
+    text-align: center;
+    font-size: 1.5em;
+    transition: 1s;
+    border: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+}
+
+button.iniciarQuiz:hover {
+    transform: scale(1.05);
+    transition: 1s;
+}
+
+
+/* INICIO DAS MINHAS ALTERAÇÕES */
+.tela {
+    position: fixed;
+    right: 0;
+    height: 100vh;
+    width: 83vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_lateral {
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 17vw;
+    height: 100%;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 7vw;
+}
+
+.usuario {
+    color: #FABB1B;
+    font-size: 1.3em;
+    margin: 20px;
+    padding: 20px 0px;
+}
+
+.usuario p {
+    font-family: "Roboto Mono", monospace;
+}
+
+button.opcoes {
+    background-color: transparent;
+    color: #FABB1B;
+    width: 12vw;
+    height: 10vh;
+    margin: 10px 0px;
+    text-align: left;
+    font-size: 1.3em;
+    border: 0px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+button.texto_btn {
+    font-family: "Roboto Mono", monospace;
+}
+button.opcoes:hover {
+    color: white;
+    transform: scale(1.05);
+    transition: 1s;
+}
+
+.cx_quiz {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 85%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#titulo_inicial {
+    font-size: 2.5em;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+radio {
+    
+}
