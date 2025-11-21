@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Quiz</title>
     <link rel="stylesheet" href="css/quiz.css">
     <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">    
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
 </head>
-<body>
-    <nav class="menu_lateral">
+
+<body onload="onloadEsconder()">
+    <nav class="menu_lateral"> <!-- Fim - menu lateral -->
         <img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt="">
         <div class="usuario">
             <p id="nome_usuario"></p>
         </div>
         <button class="opcoes">
             <i class="bi bi-house-door"></i>
-            <span class="texto_btn">Início</span>
+            <span class="texto_btn" onclick="inicio()">Início</span>
         </button>
         <button class="opcoes">
             <i class="bi bi-columns-gap"></i>
-            <span class="texto_btn">Dashboard</span>
+            <span class="texto_btn" onclick="dashboard()">Dashboard</span>
         </button>
         <button class="opcoes">
             <i class="bi bi-bar-chart"></i>
@@ -33,63 +35,444 @@
         </button>
     </nav> <!-- Fim - menu lateral -->
 
-    <div class="tela"> <!-- NÃO MEXER NO HTML E CSS -->
-        <!-- PRIMEIRA TELA -->
-        <div class="cx_quiz_inicial" id="cx_quiz_inicial">
-            <h1 class="titulo_inicial">Preparado para o desafio? Comece o quiz!</h1>
-            <button class="iniciarQuiz" onclick="iniciarQuiz()">Iniciar Quiz</button>
-        </div>
 
-        <!-- SEGUNDA TELA -->
-        <div class="cx_perguntas" id="cx_perguntas">
-            
-            <!-- Primeira Pergunta -->
-            <legend>A dança Caporales foi inspirada em qual figura histórica?</legend>
-            <div class="alternativas">
-                <input id="opcao1" type="radio" name="primeira_pergunta" id="">
-                <label for="opcao1">
-                    Mineiros das montanhas de Potosí
-                </label>
+    <div class="tela">
+        <div class="cx_quiz"> <!-- FUNDO PRETO -->
 
-                <input id="opcao2" type="radio" name="primeira_pergunta">
-                <label for="opcao2">
-                    Capatazes afro-bolivianos
-                </label>
+            <div id="msg_inicial">
+                <h1 id="titulo_inicial">Preparado para o desafio? Comece o quiz!</h1>
+                <button id="btnIniciarQuiz" class="iniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+            </div><!-- FIM msg_inicial -->
 
-                <input id="opcao3" type="radio" name="primeira_pergunta">
-                <label for="opcao3">
-                    Artesãos de La Paz
-                </label>
+            <div id="pontuacao" class="pontuacao">
 
-                <input id="opcao4" type="radio" name="primeira_pergunta">
-                <label for="opcao4">
-                    Pastores andinos
-                </label>
-                <!-- Fim Primeira Pergunta -->
-            </div>
-            <button class="next" id="next"> Proxímo</button>
-        </div>
+                <div id="pontuacaoDuranteJogo" class="pontuacaoDuranteJogo">
+                    <div class="acertos">
+                        <span>Quantidade de acertos:</span>
+                        <span id="spanCertas" class="metrica"></span>
+                    </div>
+                    <div class="erros">
+                        <span>Quantidade de erros:</span>
+                        <span id="spanErradas" class="metrica"></span>
+                    </div>
+                </div>
 
-    </div> <!-- FIM TELA -->
+                <div id="pontuacaoFinalJogo" class="pontuacaoFinalJogo">
+                    <div class="pontoFinal">
+                        <span id="pontuacaoFinal">Pontuação Final:
+                        </span>
+                        <span id="spanPontuacaoFinal"></span>
+                    </div>
+                    <span id="msgFinal" class="msgFinal"></span>
+                </div>
+            </div> <!-- FIM pontiação -->
 
+
+            <div id="jogo" class="jogo">
+
+                <div id="infoQuestao" class="infoQuestao">
+                    <span style="margin-left: 10px;">Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>questões.</span>
+                </div>
+
+                <div id="perguntaDaQuestaoAtual" class="perguntaDaQuestaoAtual">
+                    <span id="spanQuestaoExibida"></span>
+                </div>
+
+                <!-- <div id="infoAlternativas">
+                    <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                </div> -->
+
+                <!-- ALTERNATIVAS -->
+                <div id="opcoes" class="alternativas">
+                    <span class="alternativa">
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA"/>
+                        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB"/>
+                        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC"/>
+                        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                    </span>
+
+                    <span class="alternativa">
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD"/>
+                        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                    </span>
+                </div>
+
+                <!-- BOTÕES -->
+                <div id="botoes" class="botoes">
+                    <button onclick="submeter()" id="btnSubmeter" class="botao">Submeter resposta</button>
+                    <button onclick="avancar()" id="btnProx" class="botao" disabled>Avançar para próxima questão</button>
+                    <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                    <button onclick="finalizar()" id="btnfinalizar" class="botao" disabled>Finalizar Tentativa</button>
+                </div> <!-- FIM botões -->
+
+            </div> <!-- FIM jogo -->
+
+        </div> <!-- TELA DE FUNDO -->
+    </div>
 </body>
+
 </html>
 <script>
+
     var nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `Olá, ${nome}`;
 
+    function inicio() {
+        window.location.reload()
+    }
+
+    function dashboard() {
+        window.location = "dashboard.html";
+    }
+
     function sair() {
         setTimeout(function () {
-                        window.location = "login.html";
-                    }, 1500);
+            window.location = "login.html";
+        }, 1000);
+    }
+
+    const listaDeQuestoes = [
+
+        {   /* PRIMEIRA PERGUNTA */
+            pergunta: "A dança Caporales foi inspirada em qual figura histórica?",
+            alternativaA: "Mineiros das montanhas de Potosí",
+            alternativaB: "Capatazes afro-bolivianos",
+            alternativaC: "Artesãos de La Paz",
+            alternativaD: "Pastores andinosAgosto",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {   /* SEGUNDA PERGUNTA */
+            pergunta: "Qual é o elemento mais característico no traje masculino do Caporales?",
+            alternativaA: "Máscara colorida",
+            alternativaB: "Chapéu de palha",
+            alternativaC: "Sinos nas botas",
+            alternativaD: "Faixas cruzadas no peito",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* TERCEIRA PERGUNTA */
+            pergunta: "A Diablada representa principalmente",
+            alternativaA: "A jornada dos mineiros pela prata",
+            alternativaB: "A celebração da agricultura",
+            alternativaC: "A luta entre o bem e o mal",
+            alternativaD: "A união entre diferentes povos",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* QUARTA PERGUNTA */
+            pergunta: "A Diablada é tradicionalmente ligada a qual evento?",
+            alternativaA: "Carnaval de Oruro",
+            alternativaB: "Festa da Virgem de Copacabana",
+            alternativaC: "Ano Novo Aymara",
+            alternativaD: "A união entre diferentes povos",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {   /* QUINTA PERGUNTA */
+            pergunta: "O tinkus tem origem em qual região da Bolívia?",
+            alternativaA: "Santa Cruz",
+            alternativaB: "Cochabamba",
+            alternativaC: "Potosí",
+            alternativaD: "Tarija",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* SEXTA PERGUNTA */
+            pergunta: "O que simbolizam os encontros representados pelo Tinkus?",
+            alternativaA: "Comércio entre",
+            alternativaB: "Lutas rituais entre comunidades",
+            alternativaC: "Cerimônias agrícolas",
+            alternativaD: "Chegada de espanhóis à região",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {   /* SETIMA PERGUNTA */
+            pergunta: "O chullo usado no Tinkus representa:",
+            alternativaA: "Modernidade da cultura boliviana",
+            alternativaB: "Elegância os dançarinos",
+            alternativaC: "Conexão com a Pachamama",
+            alternativaD: "Influência europeia",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* OITAVA PERGUNTA */
+            pergunta: "A Morenada é conhecida por seus movimentos:",
+            alternativaA: "Saltos altos e giros rápidos",
+            alternativaB: "Movimentos lentos e compassados",
+            alternativaC: "Passos marcados e agressivos",
+            alternativaD: "Deslocamentos quase acrobáticos",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {   /* NONA PERGUNTA */
+            pergunta: "A origem da Morenada está ligada principalmente a:",
+            alternativaA: "Pastores das regiões altas",
+            alternativaB: "Trabalhadores dos campos agrícolas",
+            alternativaC: "Escravos africanos nas minas",
+            alternativaD: "Comunidades lacustres do Titicaca",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* DECIMA PERGUNTA */
+            pergunta: "As máscaras exageradas da Morenada simbolizam",
+            alternativaA: "A vitória sobre os espanhóis",
+            alternativaB: "A resistência e a celebração",
+            alternativaC: "A feição dos antigos deuses andinos",
+            alternativaD: "A fertilidade agrícola",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {   /* DECIMA PRIMEIRA PERGUNTA */
+            pergunta: "Qual dança é fortemente associada à Virgem do Socavón?",
+            alternativaA: "Tinkus",
+            alternativaB: "Caporales",
+            alternativaC: "Diablada",
+            alternativaD: "Tobas",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {   /* DECIMA SEGUNDA PERGUNTA */
+            pergunta: "O Caporales surgiu inicialmente em:",
+            alternativaA: "sucre",
+            alternativaB: "La Paz",
+            alternativaC: "Cochabamba",
+            alternativaD: "Oruro",
+            alternativaCorreta: "alternativaB"
+        },
+
+    ]
+
+    // variáveis globais    
+    let numeroDaQuestaoAtual = 0
+    let pontuacaoFinal = 0
+    let tentativaIncorreta = 0
+    let certas = 0
+    let erradas = 0
+    let quantidadeDeQuestoes = listaDeQuestoes.length
+
+    var fkUsuario = sessionStorage.ID_USUARIO;
+    var fkQuiz = 1;
+
+    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+
+    function onloadEsconder() {
+        document.getElementById('pontuacao').style.display = "none"
+        document.getElementById('jogo').style.display = "none"
     }
 
     function iniciarQuiz() {
-        document.getElementById("cx_quiz_inicial").style.display = "none";
-        document.getElementById("cx_perguntas").style.display = "flex";
+        document.getElementById('pontuacao').style.display = "flex"
+        document.getElementById('jogo').style.display = "flex"
+        document.getElementById('msg_inicial').style.display = "none"
+
+        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+
+        preencherHTMLcomQuestaoAtual(0)
+
+        btnSubmeter.disabled = false
+        btnProx.disabled = true
+        // btnConcluir.disabled = true
+        btnfinalizar.disabled = true
     }
 
-    function next() {
+    function preencherHTMLcomQuestaoAtual(index) {
+        habilitarAlternativas(true)
+        const questaoAtual = listaDeQuestoes[index]
+        numeroDaQuestaoAtual = index
+        console.log("questaoAtual")
+        console.log(questaoAtual)
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+    }
+
+    function submeter() {
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+
+        let hasChecked = false
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                hasChecked = true
+                break
+            }
+        }
+
+        if (!hasChecked) {
+            alert("Não há alternativas escolhidas. Escolha uma opção.")
+        } else {
+            btnSubmeter.disabled = true
+            btnProx.disabled = false
+
+            habilitarAlternativas(false)
+
+            checarResposta()
+        }
+    }
+
+    function habilitarAlternativas(trueOrFalse) {
+        let opcaoEscolhida = trueOrFalse ? false : true
+
+        primeiraOpcao.disabled = opcaoEscolhida
+        segundaOpcao.disabled = opcaoEscolhida
+        terceiraOpcao.disabled = opcaoEscolhida
+        quartaOpcao.disabled = opcaoEscolhida
+
+    }
+
+    function avancar() {
+        btnProx.disabled = true
+        btnSubmeter.disabled = false
+
+        desmarcarRadioButtons()
+
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) { /* Questão menor que a ultima questão */
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) { /* Questão é a ultima questão */
+            // alert("Atenção... a próxima é a ultima questão!")
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+        } else { /*  */
+            finalizarJogo()
+        }
+        limparCoresBackgroundOpcoes()
+    }
+
+    function finalizar() {
+        // atualiza a página
         
+        let porcentagemDeAcertos = (pontuacaoFinal / quantidadeDeQuestoes).toFixed(3);
+
+        fetch("/tentativa/registrarTentativa", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkUsuarioServer: fkUsuario,
+                fkQuizServer: fkQuiz,
+                certasServer: certas,
+                erradasServer: erradas,
+                porcentagemServer: porcentagemDeAcertos
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    console.log("Tentativa foi registrada com sucesso!")
+                
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                return false;
+            });
+
+        
+        
+        window.location = "quiz.html";
+        // window.location.reload()
+    }
+
+    function checarResposta() {
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
+        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+
+        const options = document.getElementsByName("option"); // recupera alternativas no html
+
+        let alternativaCorreta = null // variável para armazenar a alternativa correta
+
+        options.forEach((option) => {
+            if (option.value === respostaQuestaoAtual) {
+                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
+                alternativaCorreta = option.labels[0].id
+            }
+        })
+
+        // verifica se resposta assinalada é correta
+        options.forEach((option) => {
+            if (option.checked === true && option.value === respostaQuestaoAtual) {
+                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+                pontuacaoFinal++
+                certas++
+                document.getElementById("spanCertas").innerHTML = certas
+                numeroDaQuestaoAtual++
+            } else if (option.checked && option.value !== respostaQuestaoAtual) {
+                const wrongLabelId = option.labels[0].id
+
+                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
+                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
+                tentativaIncorreta++
+                erradas++
+                document.getElementById("spanErradas").innerHTML = erradas
+                numeroDaQuestaoAtual++
+            }
+        })
+    }
+
+    function limparCoresBackgroundOpcoes() {
+        const options = document.getElementsByName("option");
+        options.forEach((option) => {
+            document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
+            document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
+        })
+    }
+
+    // Função para desmarcar as opções
+    function desmarcarRadioButtons() {
+        const options = document.getElementsByName("option");
+        for (let i = 0; i < options.length; i++) {
+            options[i].checked = false;
+        }
+    }
+
+    function finalizarJogo() {
+        let textoParaMensagemFinal = null
+        let classComCoresParaMensagemFinal = null
+        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
+
+        if (porcentagemFinalDeAcertos <= 0.3) {
+            textoParaMensagemFinal = "Parece que você não estudou..."
+            // classComCoresParaMensagemFinal = "text-danger-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
+            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+        //     classComCoresParaMensagemFinal = "text-warning-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos >= 0.9) {
+            textoParaMensagemFinal = "Uau, parabéns!"
+            // classComCoresParaMensagemFinal = "text-success-with-bg"
+        }
+
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
+
+
+        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+        // document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+
+        document.getElementById('jogo').classList.add("text-new-gray")
+
+        btnProx.disabled = true
+        btnSubmeter.disabled = true
+        // btnConcluir.disabled = true
+        btnfinalizar.disabled = false
+
     }
 </script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jach'a Ajayu - Dashboard</title>
+    <link rel="stylesheet" href="../public/css/">
+    <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <nav class="menu_lateral"> <!-- Fim - menu lateral -->
+        <img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt="">
+        <div class="usuario">
+            <p id="nome_usuario"></p>
+        </div>
+        <button class="opcoes">
+            <i class="bi bi-house-door"></i>
+            <span class="texto_btn" onclick="inicio()">Início</span>
+        </button>
+        <button class="opcoes">
+            <i class="bi bi-columns-gap"></i>
+            <span class="texto_btn">Dashboard</span>
+        </button>
+        <button class="opcoes">
+            <i class="bi bi-bar-chart"></i>
+            <span class="texto_btn">Ranking</span>
+        </button>
+        <button class="opcoes">
+            <span class="icone"><i class="bi bi-x-lg"></i></span>
+            <span class="texto_btn" onclick="sair()">Sair</span>
+        </button>
+    </nav> <!-- Fim - menu lateral -->
+
+
+    <div class="tela">
+        <div class="cx_quiz"> <!-- FUNDO PRETO -->
+            
+        </div> <!-- TELA DE FUNDO -->
+    </div>
+</body>
+
+</html>
+<script>
+
+    var nome = sessionStorage.NOME_USUARIO;
+    nome_usuario.innerHTML = `Olá, ${nome}`;
+
+    function inicio() {
+        window.location = "quiz.html";
+    }
+
+    function sair() {
+        setTimeout(function () {
+            window.location = "login.html";
+        }, 1000);
+    }
+
+</script>
