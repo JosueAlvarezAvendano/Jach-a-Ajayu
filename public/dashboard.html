@@ -36,15 +36,18 @@
     <div class="tela">
         <div class="cx_dashboard"> <!-- FUNDO PRETO -->
             <div class="cx_kpis">
-                <div class="kpi h_acertos">
-                    <span class="span_texto">Acertos (Última Tentativa):</span>
-                    <span id="acertos_ultimo">10</span>
-
+                <div class="kpi maiorPontuacao">
+                    <span class="span_texto">Maior Pontuação:</span>
+                    <span class="span_texto" id="maior_acerto" style="font-size: 2em;">10</span>
                 </div>
-                <div class="kpi h_erros">
-                    <span class="span_texto">Erros (Última Tentativa):</span>
-                    <span id="erros_ultimo">10</span>
+                <div class="kpi mediaPontuacao">
+                    <span class="span_texto">Pontuação Média:</span>
+                    <span class="span_texto" id="media_acertos" style="font-size: 2em;">10</span>
                 </div>
+                <!-- <div class="kpi media">
+                    <span class="span_texto">Média de acertos:</span>
+                    <span class="span_texto" id="erros_ultimo" style="font-size: 2em;">10</span>
+                </div> -->
             </div> <!-- FIM CX KPIs -->
 
             <div class="cx_grafico">
@@ -115,10 +118,13 @@
 
 
     function dashboard() {
+
         var idUsuario = sessionStorage.ID_USUARIO;
 
-        fetch(`/dados/pegarDados/${idUsuario}`, {
+        console.log("Chamei o entrar()");
 
+
+        fetch(`/dados/pegarDados/${idUsuario}`, {
 
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
@@ -130,13 +136,22 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    var qtdAcertos = json.qtdAcertos
-                    var qtdErros = json.qtdErros
+                    var maiorAcerto = json.maior_acerto;   
+                    var mediaAcertos = Number(json.media_acertos);   
+                    // var qtdAcertos = json.qtdAcertos
+                    // var qtdErros = json.qtdErros
 
-                    console.log(qtdAcertos, qtdErros)
+                    console.log(maiorAcerto, mediaAcertos)
+                    // console.log(qtdAcertos, qtdErros)
+                    console.log(mediaAcertos)
+                    console.log(maiorAcerto)
 
-                    acertos_ultimo.innerHTML = `${qtdAcertos}`;
-                    erros_ultimo.innerHTML = `${qtdErros}`;
+                    maior_acerto.innerHTML = `${maiorAcerto}`
+                    media_acertos.innerHTML = `${mediaAcertos}`;
+
+
+                    // acertos_ultimo.innerHTML = `${qtdAcertos}`;
+                    // erros_ultimo.innerHTML = `${qtdErros}`;
 
 
                 });
@@ -171,9 +186,7 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    // console.log(resultado[0].nome)
-                    nome_primeiro.innerHTML = `${json[0].nome}`;
-
+                    preencherRanking(json);
 
                 });
 
@@ -194,6 +207,24 @@
 
         return false;
 
+    }
+
+
+    function preencherRanking(lista) {
+        document.getElementById("nome_primeiro").innerHTML = lista[0].nome;
+        document.getElementById("pontuacao_primeiro").innerHTML = `${lista[0].porcentagem * 100} %`;
+
+        document.getElementById("nome_segundo").innerHTML = lista[1].nome;
+        document.getElementById("pontuacao_segundo").innerHTML = `${lista[1].porcentagem * 100} %`;
+
+        document.getElementById("nome_terceiro").innerHTML = lista[2].nome;
+        document.getElementById("pontuacao_terceiro").innerHTML = `${lista[2].porcentagem * 100} %`;
+
+        document.getElementById("nome_quarto").innerHTML = lista[3].nome;
+        document.getElementById("pontuacao_quarto").innerHTML = `${lista[3].porcentagem * 100} %`;
+
+        document.getElementById("nome_quinto").innerHTML = lista[4].nome;
+        document.getElementById("pontuacao_quinto").innerHTML = `${lista[5].porcentagem * 100} %`;
     }
 
 
@@ -260,29 +291,29 @@
                             size: 14
                         }
                     }
-                }
-                // tooltip: {
-                //     backgroundColor: '#333', // Cor de fundo do tooltip
-                //     titleColor: '#fff', // Cor do título
-                //     bodyColor: '#fff', // Cor do corpo do texto
-                //     borderColor: '#ddd',
-                //     borderWidth: 1,
-                //     cornerRadius: 5, // Cantos arredondados
-                //     callbacks: {
-                //         label: function (context) {
-                //             let label = context.dataset.label || '';
+                },
+                tooltip: {
+                    backgroundColor: '#333', // Cor de fundo do tooltip
+                    titleColor: '#fff', // Cor do título
+                    bodyColor: '#fff', // Cor do corpo do texto
+                    borderColor: '#ddd',
+                    borderWidth: 1,
+                    cornerRadius: 5, // Cantos arredondados
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
 
-                //             if (label) {
-                //                 label += ': ';
-                //             }
-                //             if (context.parsed.y !== null) {
-                //                 // Adiciona o símbolo de % ao valor Y
-                //                 label += context.parsed.y + '%';
-                //             }
-                //             return label;
-                //         }
-                //     }
-                // }
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                // Adiciona o símbolo de % ao valor Y
+                                label += context.parsed.y + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
             },
             // responsive: true,
             maintainAspectRatio: false

@@ -2,7 +2,6 @@ var dadosModel = require("../models/dadosModel");
 
 
 function pegarDados(req, res) {
-    // var email = req.body.emailServer;
     var idUsuario = req.params.idUsuario;
 
     dadosModel.pegarDados(idUsuario)
@@ -29,19 +28,18 @@ function pegarDados(req, res) {
 }
 
 function pegarRanking(req, res) {
-    // var email = req.body.emailServer;
-    // var idUsuario = req.params.idUsuario;
 
     dadosModel.pegarRanking()
         .then((resultado)=>{
     
-            if (resultado.length == 1) {
+            if (resultado.length > 0) {
                 console.log(resultado);
     
-                res.status(200).send(resultado[0]);
-    
+                res.status(200).send(resultado);
+
             } else {
                 res.status(204).json([])
+                
             }
         }
 
