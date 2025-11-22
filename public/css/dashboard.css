@@ -5,7 +5,7 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    border: 1px dashed white;
+    /* border: 1px dashed white; */
 }
 
 body {
@@ -45,7 +45,7 @@ img {
 }
 
 .usuario {
-    color: #FABB1B;
+    color: #fabb1b;
     font-size: 1.3em;
     margin: 20px;
     padding: 20px 0px;
@@ -79,8 +79,8 @@ button.opcoes:hover {
 
 .cx_dashboard {
     background-color: rgba(0, 0, 0, 0.9);
-    width: 85%;
-    height: 85%;
+    width: 90%;
+    height: 90%;
     display: flex;
     position: relative;
 
@@ -112,11 +112,13 @@ button.opcoes:hover {
 }
 
 .h_acertos {
-    background-color: #30aa71;
+    /* background-color: #30aa71; */
+    background-color: #2E7D32;
 }
 
 .h_erros {
-    background-color: #dc3545;
+    /* background-color: #dc3545; */
+    background-color: #C62828;
 }
 
 .cx_grafico {
@@ -130,11 +132,31 @@ button.opcoes:hover {
     align-items: center;
 }
 
-.grafico {
-    background-color: #0762C8;
+.card_grafico {
+    background-color: #2E7D32;
+    border-radius: 10px;
     height: 90%;
     width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 5px #2E7D32;
+    transition: 1s;
 }
+
+.card_grafico:hover {
+    transform: scale(1.05);
+    transition: 1s;
+}
+
+.grafico {
+    background-color: rgb(0, 0, 0);
+    border: 2ps solid rgb(250, 187, 27) ;
+    border-radius: 10px;
+    height: 95%;
+    width: 97%;
+}
+
 
 .cx_ranking {
     height: 100%;
@@ -148,14 +170,23 @@ button.opcoes:hover {
 }
 
 .ranking {
-    background-color: chocolate;
+    color: #FABB1B;
+    background-color: black;
+    border: 10px solid #FABB1B;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #FABB1B;
     height: 90%;
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    transition: 1s;
+}
 
+.ranking:hover {
+    transform: scale(1.05);
+    transition: 1s;
 }
 
 h1 {

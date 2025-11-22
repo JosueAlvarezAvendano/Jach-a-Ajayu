@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -36,19 +37,21 @@
         <div class="cx_dashboard"> <!-- FUNDO PRETO -->
             <div class="cx_kpis">
                 <div class="kpi h_acertos">
-                    <span class="span_texto">Acertos (Última Quiz):</span>
+                    <span class="span_texto">Acertos (Última Tentativa):</span>
                     <span id="acertos_ultimo">10</span>
 
                 </div>
                 <div class="kpi h_erros">
-                    <span class="span_texto">Erros (Última Quiz):</span>
+                    <span class="span_texto">Erros (Última Tentativa):</span>
                     <span id="erros_ultimo">10</span>
                 </div>
             </div> <!-- FIM CX KPIs -->
 
             <div class="cx_grafico">
-                <div class="grafico">
-                    <!-- AQUI VAI O GRÁFICO -->
+                <div class="card_grafico">
+                    <div class="grafico">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div> <!-- FIM GRAFICO -->
 
@@ -110,88 +113,179 @@
         }, 500);
     }
 
-    
+
     function dashboard() {
         var idUsuario = sessionStorage.ID_USUARIO;
 
         fetch(`/dados/pegarDados/${idUsuario}`, {
-    
-                
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-    
-                if (resposta.ok) {
-                    console.log(resposta);
-    
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        
-                        var qtdAcertos = json.qtdAcertos
-                        var qtdErros = json.qtdErros
-
-                        console.log(qtdAcertos, qtdErros)
-
-                        acertos_ultimo.innerHTML = `${qtdAcertos}`;
-                        erros_ultimo.innerHTML = `${qtdErros}`;
 
 
-                    });
-    
-                } else {
-    
-                    console.log("Houve um erro ao tentar realizar o login!");
-    
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                        // finalizarAguardar(texto);
-                    });
-                }
-    
-            }).catch(function (erro) {
-                console.log(erro);
-            })
-    
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    var qtdAcertos = json.qtdAcertos
+                    var qtdErros = json.qtdErros
+
+                    console.log(qtdAcertos, qtdErros)
+
+                    acertos_ultimo.innerHTML = `${qtdAcertos}`;
+                    erros_ultimo.innerHTML = `${qtdErros}`;
 
 
-            //INICIO DADOS RANKING
-            fetch(`/dados/pegarRanking`, {
-    
-                
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-    
-                if (resposta.ok) {
-                    console.log(resposta);
-    
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        
-                        // console.log(resultado[0].nome)
-                        nome_primeiro.innerHTML = `${json[0].nome}`;
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
 
 
-                    });
-    
-                } else {
-    
-                    console.log("Houve um erro ao tentar realizar o login!");
-    
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                        // finalizarAguardar(texto);
-                    });
-                }
-    
-            }).catch(function (erro) {
-                console.log(erro);
-            })
+
+        //INICIO DADOS RANKING
+        fetch(`/dados/pegarRanking`, {
 
 
-            return false;
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    // console.log(resultado[0].nome)
+                    nome_primeiro.innerHTML = `${json[0].nome}`;
+
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
+        return false;
 
     }
 
 
+</script>
+
+<script> /* SCRIPT GRAFICO CHART JS */
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, { /* type, data, options */
+        type: 'bar',
+        data: { /* JSON dos dados */
+            labels: ['5ª mais recente', '4ª mais recente', '3ª mais recente', '2ª mais recente', 'Mais recente'], /* Nome das colunas */
+            datasets: [{
+                label: '# of Votes', /* Legenda */
+                backgroundColor: '#7cdb81',
+                borderColor: '#2E7D32',
+                data: [19, 3, 5, 2, 3], /* Valores dos pontos */
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: { // Eixo Y
+                    beginAtZero: true, // Começa do zero
+                    ticks: {
+                        color: '#444', // Cor dos rótulos (ticks)
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.3)', // Cor das linhas de grade
+                        borderColor: '#ccc',
+                    }
+                },
+                x: { // Eixo X
+                    ticks: {
+                        color: '#444',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    grid: {
+                        display: false // Oculta as linhas de grade do eixo X
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Histórico de Acertos por tentativa',
+                    color: '#2E7D32', /* Cor da Fonte */
+                    font: { /* JSON da Fonte */
+                        size: 18, // Tamanho da fonte
+                        weight: 'bold'
+                    }
+                },
+                legend: { /* ESTILIZAÇÂO da Legenda */
+                    display: true,
+                    position: 'bottom', // Posição (top, bottom, left, right)
+                    labels: {
+                        color: '#666', // Cor do texto da legenda
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+                // tooltip: {
+                //     backgroundColor: '#333', // Cor de fundo do tooltip
+                //     titleColor: '#fff', // Cor do título
+                //     bodyColor: '#fff', // Cor do corpo do texto
+                //     borderColor: '#ddd',
+                //     borderWidth: 1,
+                //     cornerRadius: 5, // Cantos arredondados
+                //     callbacks: {
+                //         label: function (context) {
+                //             let label = context.dataset.label || '';
+
+                //             if (label) {
+                //                 label += ': ';
+                //             }
+                //             if (context.parsed.y !== null) {
+                //                 // Adiciona o símbolo de % ao valor Y
+                //                 label += context.parsed.y + '%';
+                //             }
+                //             return label;
+                //         }
+                //     }
+                // }
+            },
+            // responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 </script>
