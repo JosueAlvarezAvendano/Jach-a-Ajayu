@@ -22,6 +22,7 @@ var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 var tentativaRouter = require("./src/routes/tentativa");
+var dadosRouter = require("./src/routes/dados");
 
 
 
@@ -38,6 +39,7 @@ app.use("/medidas", medidasRouter);
 app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
 app.use("/tentativa", tentativaRouter);
+app.use("/dados", dadosRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

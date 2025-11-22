@@ -6,8 +6,8 @@ function registrarTentativa(fkUsuario, fkQuiz, certas, erradas, porcentagem) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, porcentagem) VALUES (2, '${fkUsuario}', '${fkQuiz}', '${certas}', '${erradas}', '${porcentagem}');
-    `; 
+        INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, porcentagem) VALUES (4, '${fkUsuario}', '${fkQuiz}', '${certas}', '${erradas}', '${porcentagem}');
+    `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }

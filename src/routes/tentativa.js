@@ -7,8 +7,7 @@ var tentativaController = require("../controllers/tentativaController");
 
 
 router.post("/registrarTentativa", function (req, res) {
-    tentativaController.registrarTentativa(req, res);
+    tentativaController.registrarTenta(req, res);
 })
-
 
 module.exports = router;

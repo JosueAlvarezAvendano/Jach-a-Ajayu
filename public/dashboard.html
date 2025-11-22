@@ -5,40 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jach'a Ajayu - Dashboard</title>
-    <link rel="stylesheet" href="../public/css/">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="shortcut icon" href="assets/imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 
-<body>
+<body onload="dashboard()">
     <nav class="menu_lateral"> <!-- Fim - menu lateral -->
         <img src="assets/imgs/logo/Jach'a_Ajayu_logoCircular.svg" alt="">
         <div class="usuario">
             <p id="nome_usuario"></p>
         </div>
         <button class="opcoes">
-            <i class="bi bi-house-door"></i>
-            <span class="texto_btn" onclick="inicio()">Início</span>
-        </button>
-        <button class="opcoes">
-            <i class="bi bi-columns-gap"></i>
-            <span class="texto_btn">Dashboard</span>
+            <i class="bi bi-check2-circle"></i>
+            <span class="texto_btn" onclick="inicio()">Quiz</span>
         </button>
         <button class="opcoes">
             <i class="bi bi-bar-chart"></i>
-            <span class="texto_btn">Ranking</span>
+            <span class="texto_btn">Dashboard</span>
         </button>
         <button class="opcoes">
-            <span class="icone"><i class="bi bi-x-lg"></i></span>
+            <i class="bi bi-door-open"></i>
             <span class="texto_btn" onclick="sair()">Sair</span>
         </button>
     </nav> <!-- Fim - menu lateral -->
 
 
     <div class="tela">
-        <div class="cx_quiz"> <!-- FUNDO PRETO -->
-            
+        <div class="cx_dashboard"> <!-- FUNDO PRETO -->
+            <div class="cx_kpis">
+                <div class="kpi h_acertos">
+                    <span class="span_texto">Acertos (Última Quiz):</span>
+                    <span id="acertos_ultimo">10</span>
+
+                </div>
+                <div class="kpi h_erros">
+                    <span class="span_texto">Erros (Última Quiz):</span>
+                    <span id="erros_ultimo">10</span>
+                </div>
+            </div> <!-- FIM CX KPIs -->
+
+            <div class="cx_grafico">
+                <div class="grafico">
+                    <!-- AQUI VAI O GRÁFICO -->
+                </div>
+            </div> <!-- FIM GRAFICO -->
+
+            <div class="cx_ranking">
+                <div class="ranking">
+                    <h1>Ranking</h1>
+                    <div class="titulo_coluna">
+                        <div class="centralizar" style="width: 25%;">Posição:</div>
+                        <div class="centralizar" style="width: 50%;">Nome:</div>
+                        <div class="centralizar" style="width: 25%;">Ponto:</div>
+                    </div>
+                    <div class="dados_ranking">
+                        <div class="dados_primeiro dados">
+                            <div class="centralizar" style="width: 25%;">1º</div>
+                            <div class="centralizar" id="nome_primeiro" style="width: 50%;">Name</div>
+                            <div class="centralizar" id="pontuacao_primeiro" style="width: 25%;">10</div>
+                        </div>
+                        <div class="dados_segundo dados">
+                            <div class="centralizar" style="width: 25%;">2º</div>
+                            <div class="centralizar" id="nome_segundo" style="width: 50%;">Name</div>
+                            <div class="centralizar" id="pontuacao_segundo" style="width: 25%;">10</div>
+                        </div>
+                        <div class="dados_terceiro dados">
+                            <div class="centralizar" style="width: 25%;">3º</div>
+                            <div class="centralizar" id="nome_terceiro" style="width: 50%;">Name</div>
+                            <div class="centralizar" id="pontuacao_terceiro" style="width: 25%;">10</div>
+                        </div>
+                        <div class="dados_quarto dados">
+                            <div class="centralizar" style="width: 25%;">4º</div>
+                            <div class="centralizar" id="nome_quarto" style="width: 50%;">Name</div>
+                            <div class="centralizar" id="pontuacao_quarto" style="width: 25%;">10</div>
+                        </div>
+                        <div class="dados_quinto dados">
+                            <div class="centralizar" style="width: 25%;">5º</div>
+                            <div class="centralizar" id="nome_quinto" style="width: 50%;">Name</div>
+                            <div class="centralizar" id="pontuacao_quinto" style="width: 25%;">10</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div> <!-- TELA DE FUNDO -->
     </div>
 </body>
@@ -56,7 +107,91 @@
     function sair() {
         setTimeout(function () {
             window.location = "login.html";
-        }, 1000);
+        }, 500);
     }
+
+    
+    function dashboard() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/dados/pegarDados/${idUsuario}`, {
+    
+                
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+    
+                if (resposta.ok) {
+                    console.log(resposta);
+    
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        
+                        var qtdAcertos = json.qtdAcertos
+                        var qtdErros = json.qtdErros
+
+                        console.log(qtdAcertos, qtdErros)
+
+                        acertos_ultimo.innerHTML = `${qtdAcertos}`;
+                        erros_ultimo.innerHTML = `${qtdErros}`;
+
+
+                    });
+    
+                } else {
+    
+                    console.log("Houve um erro ao tentar realizar o login!");
+    
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        // finalizarAguardar(texto);
+                    });
+                }
+    
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+    
+
+
+            //INICIO DADOS RANKING
+            fetch(`/dados/pegarRanking`, {
+    
+                
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+    
+                if (resposta.ok) {
+                    console.log(resposta);
+    
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        
+                        // console.log(resultado[0].nome)
+                        nome_primeiro.innerHTML = `${json[0].nome}`;
+
+
+                    });
+    
+                } else {
+    
+                    console.log("Houve um erro ao tentar realizar o login!");
+    
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        // finalizarAguardar(texto);
+                    });
+                }
+    
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+
+            return false;
+
+    }
+
 
 </script>
