@@ -67,7 +67,8 @@
             <div id="jogo" class="jogo">
 
                 <div id="infoQuestao" class="infoQuestao">
-                    <span style="margin-left: 10px;">Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>questões.</span>
+                    <span style="margin-left: 10px;">Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span
+                            id="qtdQuestoes"></span>questões.</span>
                 </div>
 
                 <div id="perguntaDaQuestaoAtual" class="perguntaDaQuestaoAtual">
@@ -81,22 +82,22 @@
                 <!-- ALTERNATIVAS -->
                 <div id="opcoes" class="alternativas">
                     <span class="alternativa">
-                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA"/>
+                        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
                         <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB"/>
+                        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
                         <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC"/>
+                        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
                         <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
                     </span>
 
                     <span class="alternativa">
-                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD"/>
+                        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
                         <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
                     </span>
                 </div>
@@ -104,7 +105,8 @@
                 <!-- BOTÕES -->
                 <div id="botoes" class="botoes">
                     <button onclick="submeter()" id="btnSubmeter" class="botao">Submeter resposta</button>
-                    <button onclick="avancar()" id="btnProx" class="botao" disabled>Avançar para próxima questão</button>
+                    <button onclick="avancar()" id="btnProx" class="botao" disabled>Avançar para próxima
+                        questão</button>
                     <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
                     <button onclick="finalizar()" id="btnfinalizar" class="botao" disabled>Finalizar Tentativa</button>
                 </div> <!-- FIM botões -->
@@ -117,6 +119,44 @@
 
 </html>
 <script>
+
+    function buscarQtdTentativa() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/dados/pegarTentativas/${idUsuario}`, {
+
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    // console.log(JSON.stringify(json));
+
+                    sessionStorage.QTD_TENTATIVAS = json.qtdTentativas;
+                    console.log(sessionStorage.QTD_TENTATIVAS)
+
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao buscar historico de tentativas");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+    }
+
+
+
 
     var nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `Olá, ${nome}`;
@@ -261,6 +301,9 @@
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
+
+        buscarQtdTentativa()
+
         document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "none"
     }
@@ -346,7 +389,8 @@
 
     function finalizar() {
         // atualiza a página
-        
+
+        let idTentativa = Number(sessionStorage.QTD_TENTATIVAS) + 1;
         let porcentagemDeAcertos = (pontuacaoFinal / quantidadeDeQuestoes).toFixed(3);
 
         fetch("/tentativa/registrarTentativa", {
@@ -357,6 +401,7 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
+                idTentativaServer: idTentativa, 
                 fkUsuarioServer: fkUsuario,
                 fkQuizServer: fkQuiz,
                 certasServer: certas,
@@ -370,7 +415,7 @@
                 if (resposta.ok) {
 
                     console.log("Tentativa foi registrada com sucesso!")
-                
+
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
@@ -380,7 +425,7 @@
                 return false;
             });
 
-        window.location = "dashboard.html";
+        // window.location = "dashboard.html";
         // window.location.reload()
     }
 
@@ -447,7 +492,7 @@
         }
         else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
             textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-        //     classComCoresParaMensagemFinal = "text-warning-with-bg"
+            //     classComCoresParaMensagemFinal = "text-warning-with-bg"
         }
         else if (porcentagemFinalDeAcertos >= 0.9) {
             textoParaMensagemFinal = "Uau, parabéns!"

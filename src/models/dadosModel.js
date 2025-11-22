@@ -20,7 +20,19 @@ function pegarRanking() {
     return database.executar(instrucaoSql);
 }
 
+function pegarTentativas(idUsuario) {
+    console.log("ACESSEI O DADOS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idUsuario)
+    var instrucaoSql = `
+        SELECT COUNT(idTentativa) AS qtdTentativas FROM tentativa WHERE fkUsuario = ${idUsuario}; 
+    `;
+    // SELECT qtdAcertos, qtdErros FROM tentativa WHERE fkUsuario = ${idUsuario} ORDER BY idTentativa LIMIT 1;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     pegarDados,
-    pegarRanking
+    pegarRanking,
+    pegarTentativas
 };

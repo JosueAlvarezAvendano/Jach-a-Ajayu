@@ -129,6 +129,19 @@ GROUP BY u.idUsuario, u.nome
 ORDER BY MAX(t.porcentagem) DESC   -- últimos usuários cadastrados
 LIMIT 5;
 
+
+SELECT 
+    MAX(qtdAcertos) AS maior_acerto,
+    AVG(qtdAcertos) AS media_acertos
+FROM tentativa
+where fkUsuario = 1;
+
+
+SELECT COUNT(idTentativa) AS qtdTentativas
+FROM tentativa
+WHERE fkUsuario = 1;
+
+
 DROP TABLE usuario;
 DROP DATABASE jacha_ajayu;
 

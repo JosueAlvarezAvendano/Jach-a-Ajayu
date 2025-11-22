@@ -1,12 +1,12 @@
 var database = require("../database/config");
 
-function registrarTentativa(fkUsuario, fkQuiz, certas, erradas, porcentagem) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkUsuario, fkQuiz, certas, erradas, porcentagem);
+function registrarTentativa(idTentativa, fkUsuario, fkQuiz, certas, erradas, porcentagem) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idTentativa, fkUsuario, fkQuiz, certas, erradas, porcentagem);
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, porcentagem) VALUES (4, '${fkUsuario}', '${fkQuiz}', '${certas}', '${erradas}', '${porcentagem}');
+        INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, porcentagem) VALUES ('${idTentativa}', '${fkUsuario}', '${fkQuiz}', '${certas}', '${erradas}', '${porcentagem}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

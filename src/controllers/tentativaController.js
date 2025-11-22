@@ -2,6 +2,7 @@ var tentativaModel = require("../models/tentativaModel");
 
 function registrarTentativa(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idTentativa = req.body.idTentativaServer;
     var fkUsuario = req.body.fkUsuarioServer;
     var fkQuiz = req.body.fkQuizServer;
     var certas = req.body.certasServer;
@@ -19,10 +20,12 @@ function registrarTentativa(req, res) {
         res.status(400).send("Sua erradas está undefined!");
     } else if (porcentagem == undefined) { /* COMENTAR */
         res.status(400).send("Sua porcentagem está undefined!")
+    } else if (idTentativa == undefined) {
+        res.status(400).send("Sua idTentativa está undefined!")
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        tentativaModel.registrarTentativa(fkUsuario, fkQuiz, certas, erradas, porcentagem)
+        tentativaModel.registrarTentativa(idTentativa, fkUsuario, fkQuiz, certas, erradas, porcentagem)
             .then(
                 function (resultado) {
                     res.json(resultado);

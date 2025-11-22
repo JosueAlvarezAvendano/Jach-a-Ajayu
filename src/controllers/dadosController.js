@@ -54,8 +54,35 @@ function pegarRanking(req, res) {
 
 }
 
+function pegarTentativas(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    dadosModel.pegarTentativas(idUsuario)
+        .then((resultado)=>{
+    
+            if (resultado.length >= 0) {
+               
+                res.status(200).send(resultado[0]);
+                console.log(resultado[0])
+    
+            } else {
+                res.status(204).json([])
+            }
+        }
+
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao tentar pegar Quantidade de Tentativas! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 
 module.exports = {
     pegarDados,
-    pegarRanking
+    pegarRanking,
+    pegarTentativas
 }

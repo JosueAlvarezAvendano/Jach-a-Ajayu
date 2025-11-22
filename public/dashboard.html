@@ -64,7 +64,7 @@
                     <div class="titulo_coluna">
                         <div class="centralizar" style="width: 25%;">Posição:</div>
                         <div class="centralizar" style="width: 50%;">Nome:</div>
-                        <div class="centralizar" style="width: 25%;">Ponto:</div>
+                        <div class="centralizar" style="width: 25%;">Acerto(%):</div>
                     </div>
                     <div class="dados_ranking">
                         <div class="dados_primeiro dados">
@@ -147,7 +147,7 @@
                     console.log(maiorAcerto)
 
                     maior_acerto.innerHTML = `${maiorAcerto}`
-                    media_acertos.innerHTML = `${mediaAcertos}`;
+                    media_acertos.innerHTML = `${mediaAcertos.toFixed(1)}`;
 
 
                     // acertos_ultimo.innerHTML = `${qtdAcertos}`;
@@ -212,19 +212,19 @@
 
     function preencherRanking(lista) {
         document.getElementById("nome_primeiro").innerHTML = lista[0].nome;
-        document.getElementById("pontuacao_primeiro").innerHTML = `${lista[0].porcentagem * 100} %`;
+        document.getElementById("pontuacao_primeiro").innerHTML = `${(lista[0].porcentagem * 100).toFixed(1)}%`;
 
         document.getElementById("nome_segundo").innerHTML = lista[1].nome;
-        document.getElementById("pontuacao_segundo").innerHTML = `${lista[1].porcentagem * 100} %`;
+        document.getElementById("pontuacao_segundo").innerHTML = `${(lista[1].porcentagem * 100).toFixed(1)}%`;
 
         document.getElementById("nome_terceiro").innerHTML = lista[2].nome;
-        document.getElementById("pontuacao_terceiro").innerHTML = `${lista[2].porcentagem * 100} %`;
+        document.getElementById("pontuacao_terceiro").innerHTML = `${(lista[2].porcentagem * 100).toFixed(1)}%`;
 
         document.getElementById("nome_quarto").innerHTML = lista[3].nome;
-        document.getElementById("pontuacao_quarto").innerHTML = `${lista[3].porcentagem * 100} %`;
+        document.getElementById("pontuacao_quarto").innerHTML = `${(lista[3].porcentagem * 100).toFixed(1)}%`;
 
         document.getElementById("nome_quinto").innerHTML = lista[4].nome;
-        document.getElementById("pontuacao_quinto").innerHTML = `${lista[5].porcentagem * 100} %`;
+        document.getElementById("pontuacao_quinto").innerHTML = `${(lista[4].porcentagem * 100).toFixed(1)}%`;
     }
 
 
