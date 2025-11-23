@@ -51,7 +51,6 @@ function pegarRanking(req, res) {
             }
         );
 
-
 }
 
 function pegarTentativas(req, res) {
@@ -80,9 +79,38 @@ function pegarTentativas(req, res) {
 
 }
 
+function pegarGrafico(req, res) {
+    var idUsuario = req.params.idUsuario; // ← pega da URL
+
+    dadosModel.pegarGrafico(idUsuario)
+        .then((resultado)=>{
+
+            if (resultado.length > 0) {
+                console.log(resultado);
+    
+                res.status(200).send(resultado);
+
+            } else {
+                res.status(204).json([])
+                
+            }
+        }
+
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao tentar dados do Grafico! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+
+}
+
 
 module.exports = {
     pegarDados,
     pegarRanking,
-    pegarTentativas
+    pegarTentativas,
+    pegarGrafico
 }

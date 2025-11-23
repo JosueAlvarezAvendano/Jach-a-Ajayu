@@ -136,8 +136,8 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    var maiorAcerto = json.maior_acerto;   
-                    var mediaAcertos = Number(json.media_acertos);   
+                    var maiorAcerto = json.maior_acerto;
+                    var mediaAcertos = Number(json.media_acertos);
                     // var qtdAcertos = json.qtdAcertos
                     // var qtdErros = json.qtdErros
 
@@ -175,7 +175,6 @@
         //INICIO DADOS RANKING
         fetch(`/dados/pegarRanking`, {
 
-
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
 
@@ -197,6 +196,134 @@
                 resposta.text().then(texto => {
                     console.error(texto);
                     // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
+        // INICIO DADOS GRAFICO
+        fetch(`/dados/pegarGrafico/${idUsuario}`, {
+
+
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    // SEPARANDO OS VALORES
+                    let valores = [];
+                    for (let i = 0; i < json.length; i++) {
+                        valores.push(json[i].qtdAcertos);
+                    }
+
+                    // INTERTENDO A ORDEM DOS VALORES
+                    let valoresInvertidos = [];
+                    for (let i = valores.length - 1; i >= 0; i--) {
+                        valoresInvertidos.push(valores[i]);
+                    }
+                    valores = valoresInvertidos;
+
+                    // COLOCANDO O IDENTIFICADOS DA COLNA
+                    let labels = [];
+                    for (let i = 0; i < valores.length; i++) {
+                        labels.push((i + 1) + "ª tentativa");
+                    }
+
+
+                    const ctx = document.getElementById('myChart');
+
+                    new Chart(ctx, { /* type, data, options */
+                        type: 'bar',
+                        data: { /* JSON dos dados */
+                            labels: labels, /* Nome das colunas */
+                            datasets: [{
+                                label: 'Quantidade de Acertos', /* Legenda */
+                                backgroundColor: '#7cdb81',
+                                borderColor: '#2E7D32',
+                                data: valores, /* Valores dos pontos */
+                                borderWidth: 3
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: { // Eixo Y
+                                    beginAtZero: true, // Começa do zero
+                                    ticks: {
+                                        color: '#444', // Cor dos rótulos (ticks)
+                                        font: {
+                                            size: 12
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(200, 200, 200, 0.3)', // Cor das linhas de grade
+                                        borderColor: '#ccc',
+                                    }
+                                },
+                                x: { // Eixo X
+                                    ticks: {
+                                        color: '#FFFFFF',
+                                        font: {
+                                            size: 12
+                                        }
+                                    },
+                                    grid: {
+                                        display: false // Oculta as linhas de grade do eixo X
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Histórico de Acertos por tentativa',
+                                    color: '#FFFFFF', /* Cor da Fonte */
+                                    font: { /* JSON da Fonte */
+                                        size: 18, // Tamanho da fonte
+                                        weight: 'bold'
+                                    }
+                                },
+                                legend: { /* ESTILIZAÇÂO da Legenda */
+                                    display: true,
+                                    position: 'bottom', // Posição (top, bottom, left, right)
+                                    labels: {
+                                        color: '#FFFFFF', // Cor do texto da legenda
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    backgroundColor: '#333', // Cor de fundo do tooltip
+                                    titleColor: '#fff', // Cor do título
+                                    bodyColor: '#fff', // Cor do corpo do texto
+                                    borderColor: '#ddd',
+                                    borderWidth: 1,
+                                    cornerRadius: 5, // Cantos arredondados
+
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                    //FIM DADOS GRAFICO
+
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar pegar dados do Grafico!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
                 });
             }
 
@@ -228,95 +355,4 @@
     }
 
 
-</script>
-
-<script> /* SCRIPT GRAFICO CHART JS */
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, { /* type, data, options */
-        type: 'bar',
-        data: { /* JSON dos dados */
-            labels: ['5ª mais recente', '4ª mais recente', '3ª mais recente', '2ª mais recente', 'Mais recente'], /* Nome das colunas */
-            datasets: [{
-                label: '# of Votes', /* Legenda */
-                backgroundColor: '#7cdb81',
-                borderColor: '#2E7D32',
-                data: [19, 3, 5, 2, 3], /* Valores dos pontos */
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: { // Eixo Y
-                    beginAtZero: true, // Começa do zero
-                    ticks: {
-                        color: '#444', // Cor dos rótulos (ticks)
-                        font: {
-                            size: 12
-                        }
-                    },
-                    grid: {
-                        color: 'rgba(200, 200, 200, 0.3)', // Cor das linhas de grade
-                        borderColor: '#ccc',
-                    }
-                },
-                x: { // Eixo X
-                    ticks: {
-                        color: '#444',
-                        font: {
-                            size: 12
-                        }
-                    },
-                    grid: {
-                        display: false // Oculta as linhas de grade do eixo X
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Histórico de Acertos por tentativa',
-                    color: '#2E7D32', /* Cor da Fonte */
-                    font: { /* JSON da Fonte */
-                        size: 18, // Tamanho da fonte
-                        weight: 'bold'
-                    }
-                },
-                legend: { /* ESTILIZAÇÂO da Legenda */
-                    display: true,
-                    position: 'bottom', // Posição (top, bottom, left, right)
-                    labels: {
-                        color: '#666', // Cor do texto da legenda
-                        font: {
-                            size: 14
-                        }
-                    }
-                },
-                tooltip: {
-                    backgroundColor: '#333', // Cor de fundo do tooltip
-                    titleColor: '#fff', // Cor do título
-                    bodyColor: '#fff', // Cor do corpo do texto
-                    borderColor: '#ddd',
-                    borderWidth: 1,
-                    cornerRadius: 5, // Cantos arredondados
-                    callbacks: {
-                        label: function (context) {
-                            let label = context.dataset.label || '';
-
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                // Adiciona o símbolo de % ao valor Y
-                                label += context.parsed.y + '%';
-                            }
-                            return label;
-                        }
-                    }
-                }
-            },
-            // responsive: true,
-            maintainAspectRatio: false
-        }
-    });
 </script>

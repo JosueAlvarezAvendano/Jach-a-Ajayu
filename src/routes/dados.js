@@ -15,4 +15,8 @@ router.get("/pegarTentativas/:idUsuario", function (req, res) {
     dadosController.pegarTentativas(req, res);
 });
 
+router.get("/pegarGrafico/:idUsuario", function (req, res) {
+    dadosController.pegarGrafico(req, res);
+});
+
 module.exports = router;
