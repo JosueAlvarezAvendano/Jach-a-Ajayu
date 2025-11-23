@@ -48,101 +48,42 @@ INSERT INTO usuario (nome, sobrenome, email, senha) VALUES
 	('Lucia', 'Fernandez', 'lucia@gmail.com', 'Fernandez02$'),
 	('Paulo', 'Guzman', 'paulo@gmail.com', 'Guzman02$'),
 	('Mariana', 'Torres', 'mariana@gmail.com', 'TOrres02$');
-    
-    
-SELECT qtdAcertos, qtdErros FROM tentativa WHERE fkUsuario = 1 ORDER BY idTentativa DESC LIMIT 1;
+
 
 INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, porcentagem) VALUES
-
--- Josué (idUsuario = 1)
-(1, 1, 1, 7, 3, 0.70),
-(2, 1, 1, 9, 1, 0.90),
-(3, 1, 1, 8, 2, 0.80),
-(4, 1, 1, 10, 0, 1.00),
-(5, 1, 1, 6, 4, 0.60),
-
--- Usuario Teste (idUsuario = 2)
-(1, 2, 1, 4, 6, 0.40),
-(2, 2, 1, 6, 4, 0.60),
-(3, 2, 1, 5, 5, 0.50),
-(4, 2, 1, 3, 7, 0.30),
-(5, 2, 1, 7, 3, 0.70),
-
--- Miguel (idUsuario = 3)
-(1, 3, 1, 8, 2, 0.80),
-(2, 3, 1, 10, 0, 1.00),
-(3, 3, 1, 7, 3, 0.70),
-(4, 3, 1, 9, 1, 0.90),
-(5, 3, 1, 6, 4, 0.60),
-
--- Lucia (idUsuario = 4)
-(1, 4, 1, 3, 7, 0.30),
-(2, 4, 1, 5, 5, 0.50),
-(3, 4, 1, 4, 6, 0.40),
-(4, 4, 1, 6, 4, 0.60),
-(5, 4, 1, 7, 3, 0.70),
-
--- Paulo (idUsuario = 5)
-(1, 5, 1, 6, 4, 0.60),
-(2, 5, 1, 7, 3, 0.70),
-(3, 5, 1, 5, 5, 0.50),
-(4, 5, 1, 8, 2, 0.85),
-(5, 5, 1, 9, 1, 0.65),
-
--- Mariana (idUsuario = 6)
-(1, 6, 1, 9, 1, 0.90),
-(2, 6, 1, 8, 2, 0.85),
-(3, 6, 1, 7, 3, 0.70),
-(4, 6, 1, 10, 0, 1.00),
-(5, 6, 1, 6, 4, 0.60);
+(1, 1, 1, 8, 4, 0.666),
+(2, 1, 1, 10, 2, 0.833),
+(3, 1, 1, 9, 3, 0.750),
+(4, 1, 1, 11, 1, 0.916),
+(5, 1, 1, 7, 5, 0.583),
+(1, 2, 1, 5, 7, 0.416),
+(2, 2, 1, 7, 5, 0.583),
+(3, 2, 1, 6, 6, 0.500),
+(4, 2, 1, 4, 8, 0.333),
+(5, 2, 1, 8, 4, 0.666),
+(1, 3, 1, 9, 3, 0.750),
+(2, 3, 1, 11, 1, 0.916),
+(3, 3, 1, 8, 4, 0.666),
+(4, 3, 1, 10, 2, 0.833),
+(5, 3, 1, 7, 5, 0.583),
+(1, 4, 1, 4, 8, 0.333),
+(2, 4, 1, 6, 6, 0.500),
+(3, 4, 1, 5, 7, 0.416),
+(4, 4, 1, 7, 5, 0.583),
+(5, 4, 1, 8, 4, 0.666),
+(1, 5, 1, 7, 5, 0.583),
+(2, 5, 1, 8, 4, 0.666),
+(3, 5, 1, 6, 6, 0.500),
+(4, 5, 1, 9, 3, 0.750),
+(5, 5, 1, 10, 2, 0.833),
+(1, 6, 1, 10, 2, 0.833),
+(2, 6, 1, 9, 3, 0.750),
+(3, 6, 1, 8, 4, 0.666),
+(4, 6, 1, 11, 1, 0.916),
+(5, 6, 1, 7, 5, 0.583);
 
 
 SELECT * FROM usuario;
 SELECT * FROM quiz;
-SELECT * FROM tentativa WHERE fkUsuario = 1;
-
-SELECT
-    -- Últimos 5 percentuais (retorna como lista separada por vírgula)
-    (SELECT GROUP_CONCAT(porcentagem ORDER BY idTentativa DESC SEPARATOR ',')
-     FROM Tentativa
-     WHERE fkUsuario = 1
-     LIMIT 5) AS ultimos_percentuais,
-
-    -- Últimos acertos e erros
-    (SELECT qtdAcertos
-     FROM Tentativa
-     WHERE fkUsuario = 1
-     ORDER BY idTentativa DESC
-     LIMIT 1) AS ultimo_acerto,
-
-    (SELECT qtdErros
-     FROM Tentativa
-     WHERE fkUsuario = 1
-     ORDER BY idTentativa DESC
-     LIMIT 1) AS ultimo_erro;
-
-
-SELECT u.nome, MAX(t.porcentagem) AS pontuacao
-FROM Usuario u
-JOIN Tentativa t ON u.idUsuario = t.fkUsuario
-GROUP BY u.idUsuario, u.nome
-ORDER BY MAX(t.porcentagem) DESC   -- últimos usuários cadastrados
-LIMIT 5;
-
-
-SELECT 
-    MAX(qtdAcertos) AS maior_acerto,
-    AVG(qtdAcertos) AS media_acertos
-FROM tentativa
-where fkUsuario = 1;
-
-
-SELECT COUNT(idTentativa) AS qtdTentativas
-FROM tentativa
-WHERE fkUsuario = 1;
-
-
-DROP TABLE usuario;
-DROP DATABASE jacha_ajayu;
-
-
+SELECT * FROM tentativa;
+SELECT * FROM tentativa WHERE fkUsuario = 2;
