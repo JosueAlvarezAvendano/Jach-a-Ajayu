@@ -14,7 +14,7 @@ function pegarDados(idUsuario) {
 function pegarRanking() {
     console.log("ACESSEI O DADOS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ")
     var instrucaoSql = `
-        SELECT u.nome AS nome, MAX(t.porcentagem) AS porcentagem FROM Usuario u JOIN Tentativa t ON u.idUsuario = t.fkUsuario GROUP BY u.idUsuario, u.nome ORDER BY MAX(t.porcentagem) DESC LIMIT 5;
+        SELECT u.nome AS nome, MAX(t.porcentagem) AS porcentagem FROM usuario u JOIN tentativa t ON u.idUsuario = t.fkUsuario GROUP BY u.idUsuario, u.nome ORDER BY MAX(t.porcentagem) DESC LIMIT 5;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
