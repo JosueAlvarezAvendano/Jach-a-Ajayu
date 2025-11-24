@@ -86,6 +86,7 @@ header ul li a:hover {
     border-radius: 10px;
 }
 
+/* FORMATAÇÃO GLOBAL */
 .card_img:hover {
     transform: scale(1.05);
     transition: 1s;
@@ -93,7 +94,7 @@ header ul li a:hover {
 
 
 /* Primeira Seção */
-.minhas_raizes {
+.primeira_secao {
     background-color: #8B0000;
     height: 85vh;
     width: 100vw;
@@ -102,13 +103,15 @@ header ul li a:hover {
     align-items: center;
 }
 
-.minhas_raizes h1 {
+.primeira_secao h1 {
     color: white;
     font-size: 3em;
     text-align: center;
     padding: 30px 0px 30px 0px;
 }
 
+
+/* Formatação Global */
 .conteudo_historia {
     width: 100vw;
     display: flex;
@@ -116,6 +119,7 @@ header ul li a:hover {
     align-items: center;
 }
 
+/* Formatação Global */
 .conteudo_historia p {
     text-align: justify;
     color: white;
@@ -146,7 +150,7 @@ header ul li a:hover {
 
 
 /* Segundo Seção */
-.inicio {
+.segunda_secao {
     background-color: #FFD700;
     height: 85vh;
     width: 100vw;
@@ -155,14 +159,14 @@ header ul li a:hover {
     align-items: center;
 }
 
-.inicio h1 {
+.segunda_secao h1 {
     color: black;
     font-size: 3em;
     text-align: center;
     padding: 30px 0px 30px 0px;
 }
 
-.inicio .card_imagem {
+.segunda_secao .card_img {
     height: 63vh;
     width: 24vw;
     border-top-left-radius: 15px;
@@ -174,14 +178,121 @@ header ul li a:hover {
     transition: 1s;
 }
 
-.inicio img {
+.segunda_secao img {
     height: 60vh;
     width: 22vw;
     object-fit: cover;
     border-radius: 10px;
 }
 
-.card_imagem:hover {
-    transform: scale(1.05);
+
+
+/* Terceira Seção */
+.terceira_secao {
+    background-color: #006400;
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.terceira_secao h1 {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+}
+
+.terceira_secao .card_img {
+    height: 63vh;
+    width: 24vw;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 3px 3px 6px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: 1s;
+}
+
+.terceira_secao img {
+    height: 60vh;
+    width: 22vw;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Quarta seção */
+
+.quarta_secao {
+    background-color: #00008B;
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quarta_secao h1 {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+}
+
+.conteudo_historia .card_img {
+    height: 63vh;
+    width: 24vw;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 3px 3px 6px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.quarta_secao img {
+    height: 60vh;
+    width: 22vw;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Quinta Seção */
+.quinta_secao {
+    background-color: #008B8B;
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.quinta_secao h1 {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    padding: 30px 0px 30px 0px;
+}
+
+.quinta_secao .card_img {
+    height: 63vh;
+    width: 24vw;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 3px 3px 6px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.quinta_secao img {
+    height: 60vh;
+    width: 22vw;
+    object-fit: cover;
+    border-radius: 10px;
 }
