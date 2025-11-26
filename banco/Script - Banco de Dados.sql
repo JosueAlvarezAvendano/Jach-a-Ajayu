@@ -1,5 +1,9 @@
 -- SCRIPT DO BANDO DE DADOS - JACH1A AJAYU
 
+-- Criando usuário
+CREATE USER 'jacha_ajayu'@'%' IDENTIFIED BY 'Ajayu02$';
+GRANT SELECT, INSERT ON jach_ajayu.* TO 'jacha_ajayu'@'%';
+
 -- Criando o Database Jach'a Ajayu
 CREATE DATABASE jacha_ajayu;
 USE jacha_ajayu;
@@ -86,4 +90,4 @@ INSERT INTO tentativa (idTentativa, fkUsuario, fkQuiz, qtdAcertos, qtdErros, por
 SELECT * FROM usuario;
 SELECT * FROM quiz;
 SELECT * FROM tentativa;
-SELECT * FROM tentativa WHERE fkUsuario = 2;
+SELECT * FROM tentativa WHERE fkUsuario = 1;

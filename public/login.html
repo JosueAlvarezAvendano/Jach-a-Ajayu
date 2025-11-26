@@ -91,6 +91,9 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
 
+                    mensagem_erro.style.color = "green";
+                    mensagem_erro.innerHTML = `Login efetuado com sucesso!`;
+
                     setTimeout(function () {
                         window.location = "quiz.html";
                     }, 1000); // apenas para exibir o loading
@@ -100,6 +103,9 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+
+                mensagem_erro.style.color = "red";
+                mensagem_erro.innerHTML = `Dados incorretos! Tente novamente!`;
 
                 resposta.text().then(texto => {
                     console.error(texto);
@@ -112,18 +118,6 @@
 
         return false;
 
-
-
-
-        // // Tudo OK
-        // mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-        // mensagem_erro.style.color = "green";
-
-        // setTimeout(() => {
-        //     window.location.href = "quiz.html";
-        // }, 1500);
     }
 
-
 </script>
-<!-- mensagem_erro.innerHTML = `E-mail ou senha inválidos. Tente novamente.`; -->

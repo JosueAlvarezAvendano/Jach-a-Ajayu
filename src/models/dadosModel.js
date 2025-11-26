@@ -5,7 +5,6 @@ function pegarDados(idUsuario) {
     var instrucaoSql = `
         SELECT MAX(qtdAcertos) AS maior_acerto, AVG(qtdAcertos) AS media_acertos FROM tentativa where fkUsuario = ${idUsuario};
     `;
-    // SELECT qtdAcertos, qtdErros FROM tentativa WHERE fkUsuario = ${idUsuario} ORDER BY idTentativa LIMIT 1;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

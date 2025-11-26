@@ -253,7 +253,7 @@ header ul li a:hover {
     transition: 1s;
 }
 
-.quarta_secao img {
+.quarta_secao video {
     height: 60vh;
     width: 22vw;
     object-fit: cover;
@@ -290,9 +290,26 @@ header ul li a:hover {
     transition: 1s;
 }
 
-.quinta_secao img {
+.quinta_secao video {
     height: 60vh;
     width: 22vw;
     object-fit: cover;
     border-radius: 10px;
 }
+
+/* INICIO RODAPÉ */
+.footer {
+   background-color: black;
+   color: white;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 4%;
+}
+
+.footer img {
+   height: 50px;
+   margin: 5px;
+}
+/* FIM RODAPÉ */
